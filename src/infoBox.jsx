@@ -52,13 +52,19 @@ const slides = [
 ];
 
 export class InfoBox extends React.Component {
-  state = {};
+  state = {
+    activeIndex: 0,
+  };
 
   renderSlide() {
     return slides.map((slide, i) => {
-      const key = Math.floor(Math.random * 1000).toString();
+      const key = Math.floor(Math.random() * 1000).toString();
+      const isActive = this.state.activeIndex === i;
       return (
-        <div key={key} className={styles.slide}>
+        <div
+          key={key}
+          className={`${styles.slide} ${isActive ? styles.active : ""}`}
+        >
           <img className={styles.img} src={slide.img} alt="" />
           <h2>{slide.title}</h2>
           <p>{slide.description}</p>
@@ -67,16 +73,47 @@ export class InfoBox extends React.Component {
     });
   }
 
+  increeseIndex() {
+    this.setState({
+      activeIndex:
+        this.state.activeIndex + 1 < slides.length
+          ? this.state.activeIndex + 1
+          : 0,
+    });
+    // this.state.activeIndex++;
+    // console.log(this.activeIndex);
+  }
+
+  decreseIndex() {
+    this.setState({
+      activeIndex:
+        this.state.activeIndex >= 1
+          ? this.state.activeIndex - 1
+          : slides.length - 1,
+    });
+  }
+
   render() {
     const slidesJsx = this.renderSlide();
-    console.log(slidesJsx);
     return (
       <div className={styles.infoBox}>
         <div className={styles.slides}>{slidesJsx}</div>
         <div className={styles.controls}>
           <button className={styles.control}>{"<<"}</button>
-          <button className={styles.control}>{"<"}</button>
-          <button className={styles.control}>{">"}</button>
+          <button
+            className={styles.control}
+            onClick={() => this.decreseIndex()}
+          >
+            {"<"}
+          </button>
+
+          <button
+            className={styles.control}
+            onClick={() => this.increeseIndex()}
+          >
+            {">"}
+          </button>
+
           <button className={styles.control}>{">>"}</button>
         </div>
       </div>
