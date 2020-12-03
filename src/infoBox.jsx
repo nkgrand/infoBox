@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./infobox.module.scss";
+import { Slide } from "./slide.jsx";
+
 const slides = [
   {
     title: "Time to Share: 6 for $3.99*",
@@ -60,16 +62,7 @@ export class InfoBox extends React.Component {
     return slides.map((slide, i) => {
       const key = Math.floor(Math.random() * 1000).toString();
       const isActive = this.state.activeIndex === i;
-      return (
-        <div
-          key={key}
-          className={`${styles.slide} ${isActive ? styles.active : ""}`}
-        >
-          <img className={styles.img} src={slide.img} alt="" />
-          <h2>{slide.title}</h2>
-          <p>{slide.description}</p>
-        </div>
-      );
+      return <Slide {...{ key, isActive, ...slide }} />;
     });
   }
 
@@ -80,8 +73,6 @@ export class InfoBox extends React.Component {
           ? this.state.activeIndex + 1
           : 0,
     });
-    // this.state.activeIndex++;
-    // console.log(this.activeIndex);
   }
 
   decreseIndex() {
