@@ -1,6 +1,5 @@
-import React, { Component } from "react";
-import { InfoBox } from "./infoBox.jsx";
-import styles from "./App.module.css";
+import React, { Component } from 'react';
+import { InfoBox } from './infoBox.jsx';
 
 class App extends Component {
   render() {

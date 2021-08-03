@@ -1,6 +1,6 @@
-import React from "react";
-import styles from "./infobox.module.scss";
-import { Slide } from "./slide.jsx";
+import React from 'react';
+import styles from './infobox.module.css';
+import { Slide } from './slide.jsx';
 
 export class InfoBox extends React.Component {
   state = {
@@ -10,7 +10,7 @@ export class InfoBox extends React.Component {
 
   async componentDidMount() {
     const response = await fetch(
-      "https://my-json-server.typicode.com/nkgrand/ads-box-server/advertisments"
+      'https://my-json-server.typicode.com/nkgrand/ads-box-server/advertisments'
     );
     const slides = await response.json();
     this.setState({ slides });
@@ -47,27 +47,27 @@ export class InfoBox extends React.Component {
 
   render() {
     const slidesJsx = this.renderSlide();
-    console.log("render");
+    console.log('render');
     return (
       <div className={styles.infoBox}>
         <div className={styles.slides}>{slidesJsx}</div>
         <div className={styles.controls}>
-          <button className={styles.control}>{"<<"}</button>
+          {/* <button className={styles.control}>{'<<'}</button> */}
           <button
             className={styles.control}
             onClick={() => this.decreseIndex()}
           >
-            {"<"}
+            {'<'}
           </button>
 
           <button
             className={styles.control}
             onClick={() => this.increeseIndex()}
           >
-            {">"}
+            {'>'}
           </button>
 
-          <button className={styles.control}>{">>"}</button>
+          {/* <button className={styles.control}>{'>>'}</button> */}
         </div>
       </div>
     );
